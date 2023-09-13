@@ -3,8 +3,8 @@ import styles from './mainpage.module.scss';
 import { useSelector, useDispatch } from "react-redux";
 import { user } from '../user/userSlice';
 import ExpirationScreen from "../expirationScreen";
+import { LangButton } from "../components/langButton/langButton";
 // import { mainpage, getMainpage } from "./mainpageSlice";
-
 
 export const MainPage = () => {
   const userData = useSelector(user);
@@ -18,8 +18,8 @@ export const MainPage = () => {
 
   return (
     <section className={styles.mainpage} >
-      <h1>Main Page</h1>
-      
+      <h1>{userData.lang === 'EN' ? 'Main Page' : 'Glavnaya stranica'}</h1>
+      <LangButton/>
       { expired ? <ExpirationScreen/> : null }
     </section>
   )

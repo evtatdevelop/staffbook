@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
 export const DatePicker = props => {
-  const { lang, valueFrom, valueTill, setValue, closePicker } = props
+  const { lang, valueFrom, valueTill, setValue } = props
 
   const [monthDay, setmonthDay] = useState(new Date(Date.now()))
   useEffect(()=> setmonthDay(valueFrom ? valueFrom : new Date(Date.now())), [valueFrom])
