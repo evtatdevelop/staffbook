@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { user } from '../user/userSlice';
 import ExpirationScreen from "../expirationScreen";
 import { LangButton } from "../components/langButton/langButton";
+import { UplodeFile } from "../components/uplodeFile/uplodeFile";
 // import { mainpage, getMainpage } from "./mainpageSlice";
 
 export const MainPage = () => {
@@ -18,8 +19,16 @@ export const MainPage = () => {
 
   return (
     <section className={styles.mainpage} >
-      <h1>{userData.lang === 'EN' ? 'Main Page' : 'Glavnaya stranica'}</h1>
-      <LangButton/>
+      <header className={styles.header}>
+        <h1>{userData.lang === 'EN' ? 'Main Page' : 'Glavnaya stranica'}</h1>
+        <LangButton/>        
+      </header>
+
+      <form  className={styles.uplodeSection}>
+        <UplodeFile/>
+      </form>
+        
+
       { expired ? <ExpirationScreen/> : null }
     </section>
   )
