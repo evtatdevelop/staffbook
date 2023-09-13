@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import { PrimaryPage } from './features/primaryPage/mainpage';
+import { MainPage } from './features/main/mainpage';
 import { useSelector, useDispatch } from "react-redux";
 import { loading, getRemote } from './features/user/userSlice';
 import { Routes, Route } from 'react-router-dom';
@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path={`${_pathBase}/`} exact element={<PrimaryPage/>}/> 
+        <Route path={`${_pathBase}/`} exact element={<MainPage/>}/> 
       </Routes>
       { load ? <Loader/> : null }
     </div>
