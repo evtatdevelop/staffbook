@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import './App.scss';
+import { PrimaryPage } from './features/primaryPage/mainpage';
+import { useSelector, useDispatch } from "react-redux";
+import { loading, getRemote } from './features/user/userSlice';
+import { Routes, Route } from 'react-router-dom';
+import { Loader } from './features/loader/loader';
+import { testMode, root } from './config';
 
 function App() {
+  const load = useSelector(loading);
+  const dispatch = useDispatch();
+  useEffect(() => { dispatch(getRemote()) }, [dispatch, ]);
+
+  const _pathBase = testMode ? '' : `/${root}`
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path={`${_pathBase}/`} exact element={<PrimaryPage/>}/> 
+      </Routes>
+      { load ? <Loader/> : null }
     </div>
   );
 }

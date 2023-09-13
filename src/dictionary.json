@@ -1,0 +1,10 @@
+{
+  "page_timeout_exceeded": {
+    "EN": "Page idle timeout exceeded",
+    "RU": "Превышено время бездействия на странице"    
+  },
+  "continue_work": {
+    "EN": "Continue work",
+    "RU": "Продолжить работу"    
+  }
+}
