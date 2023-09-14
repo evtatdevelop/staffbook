@@ -14,8 +14,8 @@ export const primarypageSlice = createSlice({
   name: 'primarypage',
   initialState,
   reducers: {
-    setFile: (state, action) => {
-      state.file = action.payload
+    saveFile: (state, action) => {
+      state.file = action.payload;
     },
   },
 
@@ -30,11 +30,10 @@ export const primarypageSlice = createSlice({
 });
 
 export const {
-  setFile,
+  saveFile,
 } = primarypageSlice.actions;
 
 export const mainpage = ( state ) => state.primarypage.data;
 export const loading  = ( state ) => state.primarypage.loading;
-export const file  = ( state ) => state.primarypage.file;
 
 export default primarypageSlice.reducer;

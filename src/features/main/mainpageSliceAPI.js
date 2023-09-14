@@ -7,6 +7,8 @@ const _apiBase = testMode
 ? 'https://request.sibgenco.local/ams_api_tst'
 : 'https://request.sibgenco.local/ams_api';
 
+export const uploadFile = ( data ) => service.uploadFile(`${_apiBase}/?q=uploadfile`, data);
+
 export const getMainpageData = ( api_key ) => offline 
   ? offlinelang === 'ru' ? service.getResource(`http://localhost:3000/mainpage`, api_key) : service.getResource(`http://localhost:3000/mainpageen`, api_key)
   : service.getResource(`${_apiBase}/?q=mainpage`, api_key);

@@ -4,10 +4,10 @@ import styles from './uploadFile.module.scss';
 import { user } from '../../user/userSlice';
 import dictionary from '../../../dictionary.json';
 
-export const UploadFile = () => {
+export const UploadFile = props => {
+  const { getFile } = props;
   const lang = useSelector(user)['lang'];
 
-  const [file, setFile] = useState();
   const [fileURL, setFileURL] = useState();
 
   const fileReader = new FileReader();
@@ -24,7 +24,7 @@ export const UploadFile = () => {
     e.preventDefault();
     if ( chechNoFiles(e.target.files) ) {
       const file = e.target.files[0];
-      setFile(file);
+      getFile(file);
       fileReader.readAsDataURL(file);      
     }
   }
@@ -33,16 +33,10 @@ export const UploadFile = () => {
     stopDefault(e);
     if ( chechNoFiles(e.dataTransfer.files) ) {
       const file = e.dataTransfer.files[0];
-      setFile(file);
+      getFile(file);
       fileReader.readAsDataURL(file);
     }
   }
-
-
-  const uplodeHandler = () => {
-    if ( file ) console.log(file);
-  }
-  
 
   return (
     <section className={styles.uplodefile} >
@@ -51,7 +45,7 @@ export const UploadFile = () => {
         onDrop={handlerDrop}
         onDragEnter={stopDefault}
         onDragOver={stopDefault}        
-      >{ file 
+      >{ fileURL
           ? <img src={fileURL}
               alt="test"
               className={styles.img}
@@ -63,11 +57,6 @@ export const UploadFile = () => {
         id='file'
         onChange={handlerChange}
       />
-
-      <button type="button" 
-        className={styles.btn}
-        onClick={ e => uplodeHandler(e) }
-      >Upload</button>
 
     </section>
   )
