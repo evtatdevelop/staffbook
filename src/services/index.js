@@ -50,17 +50,6 @@ export default class Service {
     return await res.json(); 
   }
 
-
-  // const fileInput = document.getElementById('fileInput'); // получаем элемент input для загрузки файла
-  // const file = fileInput.files[0]; // получаем выбранный файл
-  // uplodeFile = async (url, data) => {
-  //   const xhr = new XMLHttpRequest(); // создаем объект XMLHttpRequest
-  //   const formData = new FormData(); // создаем объект FormData для передачи файла
-  //   formData.append('file', data.file); // добавляем файл в объект FormData
-  //   xhr.open('POST', url); // указываем метод и URL сервера, куда будет отправлен файл
-  //   xhr.send(formData); // отправляем запрос на сервер с помощью метода send()    
-  // }
-
   uploadFile = async (url, data) => {
     console.log(data);
     const formData = new FormData();

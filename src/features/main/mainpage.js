@@ -6,12 +6,16 @@ import ExpirationScreen from "../expirationScreen";
 import { LangButton } from "../components/langButton/langButton";
 import { UploadFile } from "../components/uploadFile/uplodeFile";
 import { uploadFile } from "./mainpageSliceAPI";
+import { data } from "./mainpageSlice";
+import { Input } from "../components/input/Input"; 
 // import { mainpage, getMainpage } from "./mainpageSlice";
 
 export const MainPage = () => {
+  const dispatch = useDispatch();
   const userData = useSelector(user);
   const load = useSelector(loading);
-  const dispatch = useDispatch();
+  const postData = useSelector(data);
+  console.log(postData);
 
   const [file, setFile] = useState();
 
@@ -22,11 +26,9 @@ export const MainPage = () => {
   const [expired, onExpired] = useState(false);
 
 
-  const uplode = () => {
-    // console.log(file);
-    if ( file ) uploadFile({'file': file, 'api_key': 'TatarenkoEG'})
-    .then(() => {console.log('Загружено'); })
-    .catch(() => { console.log('Ошибка');})
+  const uplode = async () => {
+    if ( file ) await uploadFile({'file': file, 'api_key': 'TatarenkoEG'})
+    console.log('Загружено');
   }
 
 
@@ -40,6 +42,12 @@ export const MainPage = () => {
             </header>
             <form  className={styles.uplodeSection}>
               <UploadFile getFile={file=>setFile(file)}/>
+              <Input 
+                inputHandler = { val => console.log(val) }
+                inputClear = { () => {} }
+                placeholder = 'Input'
+                val = ''
+              />
               <button type="button" 
                 className={styles.btn}
                 onClick={uplode}
