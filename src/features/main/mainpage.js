@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from './mainpage.module.scss';
 import { useSelector, useDispatch } from "react-redux";
-import { user } from '../user/userSlice';
+import { user, loading } from '../user/userSlice';
 import ExpirationScreen from "../expirationScreen";
 import { LangButton } from "../components/langButton/langButton";
-import { UplodeFile } from "../components/uplodeFile/uplodeFile";
+import { UploadFile } from "../components/uploadFile/uplodeFile";
 // import { mainpage, getMainpage } from "./mainpageSlice";
 
 export const MainPage = () => {
   const userData = useSelector(user);
+  const load = useSelector(loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,15 +20,18 @@ export const MainPage = () => {
 
   return (
     <section className={styles.mainpage} >
-      <header className={styles.header}>
-        <h1>{userData.lang === 'EN' ? 'Main Page' : 'Glavnaya stranica'}</h1>
-        <LangButton/>        
-      </header>
-
-      <form  className={styles.uplodeSection}>
-        <UplodeFile/>
-      </form>
-        
+      { !load
+        ? <>
+            <header className={styles.header}>
+              <h1>{userData.lang === 'EN' ? 'Main Page' : 'Glavnaya stranica'}</h1>
+              <LangButton/>        
+            </header>
+            <form  className={styles.uplodeSection}>
+              <UploadFile/>
+            </form>       
+          </>
+        : null
+      }
 
       { expired ? <ExpirationScreen/> : null }
     </section>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styles from './uplodeFile.module.scss';
-import { user } from '../../user/userSlice';
 import { useSelector } from "react-redux";
+import styles from './uploadFile.module.scss';
+import { user } from '../../user/userSlice';
 import dictionary from '../../../dictionary.json';
 
-export const UplodeFile = () => {
+export const UploadFile = () => {
   const lang = useSelector(user)['lang'];
 
   const [file, setFile] = useState();
@@ -13,41 +13,44 @@ export const UplodeFile = () => {
   const fileReader = new FileReader();
   fileReader.onloadend = () => setFileURL(fileReader.result);
 
+  const stopDefault = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  const chechNoFiles = files => files && files.length;
+
   const handlerChange = e => {
     e.preventDefault();
-    if ( e.target.files && e.target.files.length ) {
-      const file = e.target.files[0]
+    if ( chechNoFiles(e.target.files) ) {
+      const file = e.target.files[0];
       setFile(file);
       fileReader.readAsDataURL(file);      
     }
   }
 
   const handlerDrop = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    if ( e.dataTransfer.files && e.dataTransfer.files.length ) {
-      setFile(e.dataTransfer.files[0]);
-      fileReader.readAsDataURL(e.dataTransfer.files[0]);
+    stopDefault(e);
+    if ( chechNoFiles(e.dataTransfer.files) ) {
+      const file = e.dataTransfer.files[0];
+      setFile(file);
+      fileReader.readAsDataURL(file);
     }
   }
 
-  const handlerDragEmpty = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  }
 
   const uplodeHandler = () => {
-    console.log(file);
-  }  
+    if ( file ) console.log(file);
+  }
+  
 
   return (
     <section className={styles.uplodefile} >
-
       <label htmlFor="file"
         className={styles.label}
         onDrop={handlerDrop}
-        onDragEnter={handlerDragEmpty}
-        onDragOver={handlerDragEmpty}        
+        onDragEnter={stopDefault}
+        onDragOver={stopDefault}        
       >{ file 
           ? <img src={fileURL}
               alt="test"
@@ -64,7 +67,7 @@ export const UplodeFile = () => {
       <button type="button" 
         className={styles.btn}
         onClick={ e => uplodeHandler(e) }
-      >Uplode</button>
+      >Upload</button>
 
     </section>
   )

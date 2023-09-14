@@ -2,7 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getMainpageData } from './mainpageSliceAPI';
 
 const initialState = {
-  loading: false, 
+  loading: false,
+  file: null,
   data: [],
   contextMenu: {},
 }
@@ -13,13 +14,8 @@ export const primarypageSlice = createSlice({
   name: 'primarypage',
   initialState,
   reducers: {
-    onContextMenu: (state, action) => {
-      state.contextMenu = action.payload
-      state.fastshow = false
-    },
-    
-    offContextMenu: (state) => {
-      state.contextMenu = {}
+    setFile: (state, action) => {
+      state.file = action.payload
     },
   },
 
@@ -34,10 +30,11 @@ export const primarypageSlice = createSlice({
 });
 
 export const {
-  onContextMenu, offContextMenu,
+  setFile,
 } = primarypageSlice.actions;
 
 export const mainpage = ( state ) => state.primarypage.data;
 export const loading  = ( state ) => state.primarypage.loading;
+export const file  = ( state ) => state.primarypage.file;
 
 export default primarypageSlice.reducer;

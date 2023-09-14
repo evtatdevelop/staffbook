@@ -3,6 +3,7 @@ import { setUserLang, getRemoteUser } from './userSliceAPI';
 
 const initialState = {
   loading: false,
+  langLoading: false,
   data: [],
 }
 
@@ -22,15 +23,17 @@ export const userSlice = createSlice({
         state.data = action.payload;
       })
 
-      .addCase(setLang.pending, ( state ) => { state.loading = true })
+      // .addCase(setLang.pending, ( state ) => { state.loading = true })
+      .addCase(setLang.pending, ( state ) => { state.langLoading = true })
       .addCase(setLang.fulfilled, ( state, action ) => {
         state.data.lang = action.payload;
-        state.loading = false;
+        state.langLoading = false;
       })
   }
 });
 
 export const loading  = ( state ) => state.user.loading;
+export const langLoading  = ( state ) => state.user.langLoading;
 export const user     = ( state ) => state.user.data;
 
 export default userSlice.reducer;
