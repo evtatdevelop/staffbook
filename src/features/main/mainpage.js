@@ -6,7 +6,7 @@ import ExpirationScreen from "../expirationScreen";
 import { LangButton } from "../components/langButton/langButton";
 import { UploadFile } from "../components/uploadFile/uplodeFile";
 import { uploadFile } from "./mainpageSliceAPI";
-import { data } from "./mainpageSlice";
+import { data, setData, upData } from "./mainpageSlice";
 import { Input } from "../components/input/Input"; 
 // import { mainpage, getMainpage } from "./mainpageSlice";
 
@@ -15,7 +15,7 @@ export const MainPage = () => {
   const userData = useSelector(user);
   const load = useSelector(loading);
   const postData = useSelector(data);
-  console.log(postData);
+
 
   const [file, setFile] = useState();
 
@@ -27,8 +27,10 @@ export const MainPage = () => {
 
 
   const uplode = async () => {
-    if ( file ) await uploadFile({'file': file, 'api_key': 'TatarenkoEG'})
+    if ( file ) await uploadFile({'file': file, 'api_key': userData.api_key});
     console.log('Загружено');
+
+    dispatch(upData( {...postData, 'api_key': userData.api_key}))
   }
 
 
@@ -43,7 +45,7 @@ export const MainPage = () => {
             <form  className={styles.uplodeSection}>
               <UploadFile getFile={file=>setFile(file)}/>
               <Input 
-                inputHandler = { val => console.log(val) }
+                inputHandler = { val => dispatch(setData(val)) }
                 inputClear = { () => {} }
                 placeholder = 'Input'
                 val = ''
