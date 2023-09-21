@@ -30,7 +30,7 @@ export const mainpageSlice = createSlice({
     builder
     .addCase(getStaffbook.pending, ( state ) => { state.loading = true })
     .addCase(getStaffbook.fulfilled, ( state, action ) => {
-      if ( state.staffbook.length < state.row_from + state.row_num )
+      if ( state.staffbook.length < state.row_from + state.row_num ) // !TODO: 
       state.staffbook = [...state.staffbook, ...action.payload];
       state.loading = false;
     })
