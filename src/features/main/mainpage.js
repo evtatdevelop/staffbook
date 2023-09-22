@@ -6,7 +6,7 @@ import ExpirationScreen from "../expirationScreen";
 import { LangButton } from "../components/langButton/langButton";
 import { UploadFile } from "../components/uploadFile/uplodeFile";
 import { uploadFile } from "./mainpageSliceAPI";
-import { data, setData, upData, getStaffbook, row_from , setRowFrom, row_num } from "./mainpageSlice";
+import { data, setData, upData, getStaffbook, row_from , setCounter, row_num, counter } from "./mainpageSlice";
 import { Input } from "../components/input/Input";
 
 export const MainPage = () => {
@@ -16,11 +16,12 @@ export const MainPage = () => {
   const postData = useSelector(data);
   const rowFrom = useSelector(row_from);
   const rowNum = useSelector(row_num);
+  const partCntr = useSelector(counter);
 
   const [file, setFile] = useState();
 
   useEffect(() => {
-    if ( userData.api_key ) dispatch(getStaffbook({api_key: userData.api_key, row_from: rowFrom, row_num: rowNum})) 
+    if ( userData.api_key && rowNum ) dispatch(getStaffbook({api_key: userData.api_key, row_from: rowFrom, row_num: rowNum})) 
     setTimeout(() => { onExpired(true); document.body.style.overflow = "hidden"}, 12*60*60*1000)
   }, [dispatch, rowFrom, rowNum, userData]);
   const [expired, onExpired] = useState(false);
@@ -30,6 +31,12 @@ export const MainPage = () => {
     if ( file ) await uploadFile({'file': file, 'api_key': userData.api_key});
     console.log('Загружено');
     dispatch(upData( {...postData, 'api_key': userData.api_key}))
+  }
+
+  const getNextPart = async() => {
+    dispatch(setCounter());
+    if ( partCntr * rowNum + 1 <= rowFrom )
+      dispatch(getStaffbook({api_key: userData.api_key, row_from: rowFrom, row_num: rowNum}));
   }
 
   return (
@@ -53,10 +60,7 @@ export const MainPage = () => {
                 onClick={uplode}
               >Upload</button>     
 
-              <button type="button" onClick={() => {
-                dispatch(setRowFrom());
-                dispatch(getStaffbook({api_key: userData.api_key, row_from: rowFrom}));
-              }}>addStaff</button>         
+              <button type="button" onClick={getNextPart}>addStaff</button>         
             </form>       
           </>
         : null
