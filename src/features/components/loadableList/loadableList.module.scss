@@ -1,0 +1,29 @@
+.staffList {
+  overflow-y: auto;
+  height: 50vh;
+}
+
+.listHeader {
+  display: flex;
+  width: calc(100% - 16px);
+  
+  div {
+    width: 20%;
+    overflow-x: hidden;
+    border: 1px solid rgba(245, 222, 179, 0.454);
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+
+    &:last-child {
+      width: 40%;
+    }
+  }
+}
+
+.btn {
+  width: 10vmax;
+  margin-top: 1vmax;
+}

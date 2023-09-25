@@ -6,7 +6,7 @@ const initialState = {
   loading: false,
   staffbook: [],
   row_from: 1,
-  row_num: 1,
+  row_num: 100,
   counter: 1,
   data: [],
 }
@@ -51,5 +51,6 @@ export const loading  = ( state ) => state.mainpage.loading;
 export const row_from  = ( state ) => state.mainpage.row_from;
 export const row_num  = ( state ) => state.mainpage.row_num;
 export const counter  = ( state ) => state.mainpage.counter;
+export const staffbook  = ( state ) => state.mainpage.staffbook;
 
 export default mainpageSlice.reducer;

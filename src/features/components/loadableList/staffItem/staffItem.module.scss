@@ -1,0 +1,17 @@
+.staffItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  div {
+    width: 20%;
+    overflow-x: hidden;
+    border: 1px solid rgba(245, 222, 179, 0.453);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+      width: 40%;
+    }
+  }
+}
