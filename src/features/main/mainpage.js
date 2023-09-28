@@ -9,6 +9,7 @@ import { uploadFile } from "./mainpageSliceAPI";
 import { data, upData } from "./mainpageSlice";
 import { LoadableList } from "../components/loadableList/loadableList";
 import { DataCollector } from "../dataCollector/dataCollector";
+import { Button } from "../components/button/button";
 
 export const MainPage = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,14 @@ export const MainPage = () => {
                  <DataCollector/>
               </fieldset>
              
-              <button type="button" className={styles.btn} onClick={uplode}>Upload</button>     
+              {/* <button type="button" className={styles.btn} onClick={uplode}>Upload</button>      */}
+              <Button
+                clickHandler = { uplode } 
+                label = 'Upload'
+                color = 'red'
+                fontSize = '18'
+                width = {162}
+              />
 
             </form>  
 

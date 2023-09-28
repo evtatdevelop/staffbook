@@ -59,6 +59,7 @@ export const DataCollector = () => {
         clickHandler = { val =>setDefaultData(val) } 
         label = 'Use as default'
         name = 'default'
+        color = 'green'
         checked = {false}
         ref={checkboxRef}
       />

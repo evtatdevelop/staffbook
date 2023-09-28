@@ -3,7 +3,7 @@ import styles from './checkbox.module.scss';
 
 // export const Checkbox = props => {
 const Checkbox = (props, ref) => {
-  const { clickHandler, label, name, checked } = props;
+  const { clickHandler, label, name, checked, color } = props;
   const [value, setValue] = useState(checked)
   const [timerId, setTimerId] = useState(null)
 
@@ -23,7 +23,7 @@ const Checkbox = (props, ref) => {
   useImperativeHandle(ref, () => ({ clear }));
 
   let styleChbx = value ? `${styles.checkbox} ${styles.checked}` : `${styles.checkbox}`
-
+  styleChbx = color ? `${styleChbx} ${styles[color]}` : `${styleChbx}`;
 
   return (
     <div className={styleChbx}>
