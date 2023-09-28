@@ -6,9 +6,9 @@ import ExpirationScreen from "../expirationScreen";
 import { LangButton } from "../components/langButton/langButton";
 import { UploadFile } from "../components/uploadFile/uplodeFile";
 import { uploadFile } from "./mainpageSliceAPI";
-import { data, setData, upData } from "./mainpageSlice";
-import { Input } from "../components/input/Input";
+import { data, upData } from "./mainpageSlice";
 import { LoadableList } from "../components/loadableList/loadableList";
+import { DataCollector } from "../dataCollector/dataCollector";
 
 export const MainPage = () => {
   const dispatch = useDispatch();
@@ -50,13 +50,14 @@ export const MainPage = () => {
             </header>
             
             <form  className={styles.uplodeSection}>
-              <UploadFile getFile={file=>setFile(file)}/>
-              <Input 
-                inputHandler = { val => dispatch(setData(val)) }
-                inputClear = { () => {} }
-                placeholder = 'Input'
-                val = ''
-              />
+              <fieldset>
+                <UploadFile getFile={file=>setFile(file)}/>
+              </fieldset>
+              
+              <fieldset>
+                 <DataCollector/>
+              </fieldset>
+             
               <button type="button" className={styles.btn} onClick={uplode}>Upload</button>     
 
             </form>  
