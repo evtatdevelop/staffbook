@@ -1,8 +1,9 @@
-import React, {useState, useRef } from "react";
+import React, {useState, useRef, forwardRef, useImperativeHandle } from "react";
 import styles from './input.module.scss';
 
-export const Input = props => {
-  const ref = useRef(null)
+// export const Input = props => {
+const Input = (props, ref) => {
+  const insideref = useRef(null)
   const {inputHandler, inputClear, placeholder, val} = props
   const [value, setValue] = useState(val ? val : "")
   const [timerId, setTimerId] = useState(null)
@@ -16,10 +17,12 @@ export const Input = props => {
     clearTimeout(timerId);
     setValue(val);
     inputClear();
-    ref.current.focus();
+    insideref.current.focus();
   }
 
   const styleClnBtn = value ? `${styles.clearBtn} ${styles.showClnBtn}` : `${styles.clearBtn}`
+
+  useImperativeHandle(ref, () => ({ clearInput }));
 
   return (
     <div className={styles.input}>
@@ -27,7 +30,7 @@ export const Input = props => {
         value={value}
         onInput={e => onInput(e.target.value)}
         placeholder = {placeholder}
-        ref={ref}
+        ref={insideref}
       />
       {<button type="button" className={styleClnBtn}
           onClick={() => clearInput()}
@@ -37,3 +40,5 @@ export const Input = props => {
     </div>
   )
 }
+
+export default forwardRef(Input);

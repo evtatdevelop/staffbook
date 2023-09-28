@@ -19,7 +19,7 @@ export const mainpageSlice = createSlice({
   name: 'mainpage',
   initialState,
   reducers: {
-    setData: (state, action) => {
+    addData: (state, action) => {
       state.data = [...state.data, action.payload];
     },
     setCounter: (state) => {
@@ -44,7 +44,7 @@ export const mainpageSlice = createSlice({
   }
 });
 
-export const { setData, setCounter } = mainpageSlice.actions;
+export const { addData, setCounter } = mainpageSlice.actions;
 
 export const data = ( state ) => state.mainpage.data;
 export const loading  = ( state ) => state.mainpage.loading;

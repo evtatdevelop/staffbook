@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import styles from './select.module.scss';
 
-export const Select = props => {
+// export const Select = props => {
+const Select = (props, ref) => {
   const {selectHandler, selectClear, placeholder, selectList, val, name} = props
   const [value, setValue] = useState(val ? val : "")
   const [show, setShow] = useState(false)
@@ -15,6 +16,9 @@ export const Select = props => {
     setValue('')
     selectClear('')
   }
+
+  useImperativeHandle(ref, () => ({ clearInput }));
+
   const styleClnBtn = value ? `${styles.clearBtn} ${styles.showClnBtn}` : `${styles.clearBtn}`
   const styleSelectList = show ? `${styles.selectList} ${styles.showSelectList}` : `${styles.selectList} ${styles.hideSelectList}`
 
@@ -50,3 +54,5 @@ export const Select = props => {
     </div>
   )
 }
+
+export default forwardRef(Select);
