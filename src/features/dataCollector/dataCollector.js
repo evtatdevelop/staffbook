@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from './dataCollector.module.scss';
-import { useSelector, useDispatch } from "react-redux";
-import { user } from '../user/userSlice';
+// import { useSelector, useDispatch } from "react-redux";
+// import { user } from '../user/userSlice';
 import Input from '../components/input';
 import Select from '../components/select';
 import { Checkbox } from "../components/checkbox/checkbox";
@@ -12,8 +12,8 @@ import { Button } from "../components/button/button";
 
 
 export const DataCollector = () => {
-  const dispatch = useDispatch();
-  const userData = useSelector(user);
+  // const dispatch = useDispatch();
+  // const userData = useSelector(user);
 
 
   return (

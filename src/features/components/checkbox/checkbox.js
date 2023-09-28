@@ -22,6 +22,7 @@ export const Checkbox = props => {
         defaultChecked={value}
         onChange={changeHandler}
       />
+      <label htmlFor={name} className={styles.visualBox}></label>
       <label htmlFor={name}>{label}</label>
 
     </div>

@@ -5,12 +5,71 @@
 
   label {
     color: #424242;
+    font-weight: 500;
+  }
+
+  .visualBox {
+    position: relative;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border: 2px solid grey;
+    border-radius: 3px;
+    color: #424242;
+    margin-right: 10px;
+    transition: border .3s,  background-color .3s, color  .3s;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 7px;
+      border-left: 3px solid white;
+      left: 3px;
+      top: 7px;
+      transform: rotate(-45deg);
+      transition: border .3s;
+    }
+
+    &::after{
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 13px;
+      border-right: 3px solid white;
+      left: 8px;
+      top: 2px;
+      transform: rotate(45deg);
+      transition: border .3s;
+    }
+  }
+
+  input[type=checkbox] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+
+  input[type=checkbox]:checked ~ .visualBox {
+    border: 2px solid green;
+    background-color: lightgreen;
+    color: white;
+    &::before {
+      border-left: 3px solid green;
+    }
+    &::after {
+      border-right: 3px solid green;
+    }
   }
 
   &.checked {
     label {
       color: green;
-      text-decoration: underline;
     }
   }
 }
