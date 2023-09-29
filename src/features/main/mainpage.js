@@ -65,6 +65,7 @@ export const MainPage = () => {
             </form>  
 
             <LoadableList
+              autoLoad={true}
               color='blue'
             />     
           </>

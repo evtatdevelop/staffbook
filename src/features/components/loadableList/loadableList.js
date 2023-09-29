@@ -6,7 +6,7 @@ import { getStaffbook, row_from , setCounter, row_num, counter, staffbook, loadi
 import { StaffItem } from "./staffItem/staffItem";
 
 export const LoadableList = props => {
-  const { color } = props;
+  const { color, autoLoad } = props;
   const ref = useRef(null)
   const dispatch = useDispatch();
   const userData = useSelector(user);
@@ -27,11 +27,12 @@ export const LoadableList = props => {
   }
 
   const scrollLoad = () => {
-    if ( ref.current.scrollHeight - ref.current.scrollTop < 400 * partCntr && !load ) {
-      dispatch(setCounter());
-      if ( partCntr * rowNum + 1 <= rowFrom )
-        dispatch(getStaffbook({api_key: userData.api_key, row_from: rowFrom, row_num: rowNum}));
-    }  
+    if ( autoLoad )
+      if ( ref.current.scrollHeight - ref.current.scrollTop < 400 * partCntr && !load ) {
+        dispatch(setCounter());
+        if ( partCntr * rowNum + 1 <= rowFrom )
+          dispatch(getStaffbook({api_key: userData.api_key, row_from: rowFrom, row_num: rowNum}));
+      }  
   }
 
   const styleTable = color ? `${styles.table} ${styles[color]}` : `${styles.table}`;
@@ -50,7 +51,7 @@ export const LoadableList = props => {
         ref={ref}
       >
         {staff.map(item => <li key={item.app12_id}><StaffItem item={item} color={color}/></li>)}
-        <li>  <button type="button" className={styles.btn} onClick={getNextPart}>addStaff</button> </li>
+        <li>  <button type="button" className={styles.btn} onClick={getNextPart}>more...</button> </li>
       </ul>    
     </section>
 

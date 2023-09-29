@@ -31,13 +31,15 @@
   li {
     width: 20%;
     overflow-x: hidden;
-    border: 1px solid hsla(var(--hue), calc(var(--sat) * 1%), var(--border-light), var(--border-alpha));
+    border-left: 1px solid hsla(var(--hue), calc(var(--sat) * 1%), var(--border-light), var(--border-alpha));
+    border-top: 1px solid hsla(var(--hue), calc(var(--sat) * 1%), var(--border-light), var(--border-alpha));
     padding: 4px;
     display: flex;
     align-items: center;
 
     &:last-child {
       width: 40%;
+      border-right: 1px solid hsla(var(--hue), calc(var(--sat) * 1%), var(--border-light), var(--border-alpha));
     }
   }
 }
