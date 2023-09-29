@@ -35,12 +35,6 @@ export const MainPage = () => {
     dispatch(upData( {...postData, 'api_key': userData.api_key}))
   }
 
-  // const getNextPart = async() => {
-  //   dispatch(setCounter());
-  //   if ( partCntr * rowNum + 1 <= rowFrom )
-  //     dispatch(getStaffbook({api_key: userData.api_key, row_from: rowFrom, row_num: rowNum}));
-  // }
-
   return (
     <section className={styles.mainpage} >
       { !load
@@ -70,7 +64,9 @@ export const MainPage = () => {
 
             </form>  
 
-            <LoadableList/>     
+            <LoadableList
+              color='blue'
+            />     
           </>
         : null
       }

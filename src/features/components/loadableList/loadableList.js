@@ -5,7 +5,8 @@ import { user } from '../../user/userSlice';
 import { getStaffbook, row_from , setCounter, row_num, counter, staffbook, loading } from "../../main/mainpageSlice";
 import { StaffItem } from "./staffItem/staffItem";
 
-export const LoadableList = () => {
+export const LoadableList = props => {
+  const { color } = props;
   const ref = useRef(null)
   const dispatch = useDispatch();
   const userData = useSelector(user);
@@ -33,22 +34,25 @@ export const LoadableList = () => {
     }  
   }
 
+  const styleTable = color ? `${styles.table} ${styles[color]}` : `${styles.table}`;
+
   return (
-    <>
+    <section className={styleTable}>
       <ul className={styles.listHeader}>
-        <div>Last name</div>
-        <div>First name</div>
-        <div>Middle name</div>
-        <div>Email</div>
+        <li>Last name</li>
+        <li>First name</li>
+        <li>Middle name</li>
+        <li className={styles.email}>Email</li>
+        <li></li>
       </ul>
       <ul className={styles.staffList}
         onScroll={scrollLoad}
         ref={ref}
       >
-        {staff.map(item => <li key={item.app12_id}><StaffItem item={item}/></li>)}
+        {staff.map(item => <li key={item.app12_id}><StaffItem item={item} color={color}/></li>)}
         <li>  <button type="button" className={styles.btn} onClick={getNextPart}>addStaff</button> </li>
       </ul>    
-    </>
+    </section>
 
      
   )

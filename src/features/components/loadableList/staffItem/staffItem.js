@@ -1,25 +1,19 @@
 import React from "react";
 import styles from './staffItem.module.scss';
-// import { useSelector, useDispatch } from "react-redux";
-// import { user } from '../../user/userSlice';
-// import { getStaffbook, row_from , setCounter, row_num, counter, staffbook } from "../../main/mainpageSlice";
 
 export const StaffItem = props => {
-  const { app12_id, company_group, domain, email, first_name, lang_code, last_name, login, middle_name, phone1, position_name } = props.item
-  // const dispatch = useDispatch();
-  // const userData = useSelector(user);
-  // const rowFrom = useSelector(row_from);
-  // const rowNum = useSelector(row_num);
-  // const partCntr = useSelector(counter);
-  // const staff = useSelector(staffbook);
+  // const { app12_id, company_group, domain, email, first_name, lang_code, last_name, login, middle_name, phone1, position_name } = props.item
+  const { app12_id, email, first_name, last_name, middle_name, } = props.item
+
+  const styleItem = props.color ? `${styles.staffItem} ${styles[props.color]}` : `${styles.staffItem}`;
 
   return (
-    <div className={styles.staffItem} key={app12_id}>
-      <div>{last_name}</div>
-      <div>{first_name}</div>
-      <div>{middle_name}</div>
-      <div>{`${email}`}</div>
-    </div>
+    <ul className={styleItem} key={app12_id}>
+      <li>{last_name}</li>
+      <li>{first_name}</li>
+      <li>{middle_name}</li>
+      <li>{email}</li>
+    </ul>
   )
 }
 

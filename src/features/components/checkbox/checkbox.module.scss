@@ -79,16 +79,13 @@
   }
 
   input[type=checkbox]:checked ~ .visualBox {
-    // border: 2px solid green;
     --border-light: calc(var(--light) * 0.7%);
     --border-alpha: calc((var(--light) - var(--border-threshold)) * 10);
     border: 2px solid hsla(var(--hue), calc(var(--sat) * 1%), var(--border-light), var(--border-alpha));
-    // background-color: lightgreen;
     background-color: hsla(var(--hue), calc(var(--sat) * 1%), calc(var(--light) * 1%), 1);
     color: white;
     &::before {
       border-left: 3px solid hsla(var(--hue), 100%, 20%, 1);;
-      // border-left: 3px solid green;
     }
     &::after {
       border-right: 3px solid hsla(var(--hue), 100%, 20%, 1);;
@@ -97,7 +94,6 @@
 
   &.checked {
     label {
-      // color: green;
       color: hsla(var(--hue), 100%, 20%, 1);
     }
   }
