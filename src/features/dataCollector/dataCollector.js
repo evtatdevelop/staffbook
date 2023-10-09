@@ -7,6 +7,7 @@ import Select from '../components/select/select';
 import Checkbox from "../components/checkbox/checkbox";
 import { Button } from "../components/button/button";
 import { addData } from "../main/mainpageSlice";
+import { Row } from '../components/row/row';
 
 export const DataCollector = () => {
   const dispatch = useDispatch();
@@ -38,38 +39,47 @@ export const DataCollector = () => {
 
   return (
     <section className={styles.dataCollector} >
-      <Select
-        selectHandler = { val => setDataType(val) }
-        selectClear  = { () => {} }
-        placeholder = 'Dta type'
-        selectList = {[{'id':'phone', 'name':'phone'}, {'id':'cellphone', 'name':'cellphone'}, {'id':'e-mail', 'name':'e-mail'}, ]}
-        val = ''
-        name='dataType'
-        ref={selectRef}
-      />
-      <Input 
-        inputHandler = { val => setData(val) }
-        inputClear = { () => {} }
-        placeholder = 'Input'
-        val = ''
-        ref={inputRef} 
-      />
+      <Row>
+        <Select
+          selectHandler = { val => setDataType(val) }
+          selectClear  = { () => {} }
+          placeholder = 'Dta type'
+          selectList = {[{'id':'phone', 'name':'phone'}, {'id':'cellphone', 'name':'cellphone'}, {'id':'e-mail', 'name':'e-mail'}, ]}
+          val = ''
+          name='dataType'
+          ref={selectRef}
+        />        
+      </Row>
 
-      <Checkbox
-        clickHandler = { val =>setDefaultData(val) } 
-        label = 'Use as default'
-        name = 'default'
-        color = 'green'
-        checked = {false}
-        ref={checkboxRef}
-      />
+      <Row>
+        <Input 
+          inputHandler = { val => setData(val) }
+          inputClear = { () => {} }
+          placeholder = 'Input'
+          val = ''
+          ref={inputRef} 
+        />        
+      </Row>
 
-      <Button
-        clickHandler = { addDataSet } 
-        label = 'Save field'
-        color = 'green'
-        fontSize = '18'
-      />
+      <Row>
+        <Checkbox
+          clickHandler = { val =>setDefaultData(val) } 
+          label = 'Use as default'
+          name = 'default'
+          color = 'green'
+          checked = {false}
+          ref={checkboxRef}
+        />       
+      </Row>
+      
+      <Row>
+        <Button
+          clickHandler = { addDataSet } 
+          label = 'Save field'
+          color = 'green'
+          fontSize = '18'
+        />        
+      </Row>
 
     </section>
   )
